@@ -1,0 +1,57 @@
+{% extends "mainPage.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-3 col-12">
+        <form id="upload" method="post" action="predictImage" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div id="drop">
+                Upload image
+                <a>Browse</a>
+                <input type="file" name="filePath" accept=".png,.jpg,.jpeg">
+                <input type="submit">
+            </div>
+        </form>
+    </div>
+    {% if predictedLabel %}
+    <div class="col">
+        <div class="predict">
+            <h5>Hasil identifikasi adalah <span>{{predictedLabel}}</span><br>dengan Akurasi <span>{{acc}} %</span></h5>
+            <div class="image">
+                <img src={{filePathName}} alt="no image" />
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
+
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+            "October", "November", "December"
+        ];
+        date = today.getDate() + ' ' + monthNames[today.getMonth()] + ' ' + today.getFullYear();
+        document.getElementById('time').innerHTML = h + ":" + m + ":" + s + " - " + date;
+        t = setTimeout(function () {
+            startTime()
+        }, 500);
+    }
+    startTime();
+</script>
+{% endblock %}

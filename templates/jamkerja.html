@@ -1,0 +1,195 @@
+{% extends "mainPage.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h4 class="card-title">Jam Kerja</h4>
+                    </div>
+                    <div class="col text-end">
+                        <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#modal-form"><i class="fas fa-calendar-plus"></i> Tambah</a>
+                        <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">Tambah Shift</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-0">
+                                        <div class="card p-3 p-lg-3">
+                                            <form action="#" class="mt-2" method="POST">
+                                            {% csrf_token %}
+                                                <div class="form-group mb-3">
+                                                    <div class="input-group">
+                                                        <input type="number" class="form-control" name="id_shift" placeholder="ID Shift">
+                                                    </div>  
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Awal Masuk</h2>
+                                                            <input type="time" class="form-control" name="awal_masuk">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Jam Masuk</h2>
+                                                            <input type="time" class="form-control" name="masuk">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Akhir Masuk</h2>
+                                                            <input type="time" class="form-control" name="akhir_masuk">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Awal Pulang</h2>
+                                                            <input type="time" class="form-control" name="awal_pulang">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Jam Pulang</h2>
+                                                            <input type="time" class="form-control" name="pulang">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 col-12 mb-3">
+                                                        <div class="form-group">
+                                                            <h2 class="mb-0 h6 text-start">Akhir Pulang</h2>
+                                                            <input type="time" class="form-control" name="akhir_pulang">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-grid">
+                                                    <button type="submit" class="btn btn-gray-800">Tambah</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <table id="jam-kerja" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Shift</th>
+                            <th>Awal Masuk</th>
+                            <th>Jam Masuk</th>
+                            <th>Akhir Masuk</th>
+                            <th>Awal Pulang</th>
+                            <th>Jam Pulang</th>
+                            <th>Akhir Pulang</th>
+                            <th>Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for shift in shifts %}
+                        <tr>
+                            <td>{{shift.id_shift}}</td>
+                            <td>{{shift.awal_masuk | date:"H:i"}}</td>
+                            <td>{{shift.masuk | date:"H:i"}}</td>
+                            <td>{{shift.akhir_masuk | date:"H:i"}}</td>
+                            <td>{{shift.awal_pulang | date:"H:i"}}</td>
+                            <td>{{shift.pulang | date:"H:i"}}</td>
+                            <td>{{shift.akhir_pulang | date:"H:i"}}</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{shift.id}}"><i class="fas fa-edit"></i></button>
+                                <div class="modal fade" id="modal{{shift.id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h2 class="h6 modal-title">Edit Shift {{shift.id_shift}}</h2>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body p-0">
+                                                <div class="card p-3 p-lg-3">
+                                                    <form action="#" class="mt-2" method="POST">
+                                                    {% csrf_token %}
+                                                        <div class="form-group mb-3">
+                                                            <div class="input-group">
+                                                                <input type="text" class="form-control" name="id_shift" value="{{shift.id_shift}}">
+                                                            </div>  
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Awal Masuk</h2>
+                                                                    <input type="time" class="form-control" name="awal_masuk" value="{{shift.awal_masuk | date:"H:i"}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Jam Masuk</h2>
+                                                                    <input type="time" class="form-control" name="masuk" value="{{shift.masuk | date:"H:i"}}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Akhir Masuk</h2>
+                                                                    <input type="time" class="form-control" name="akhir_masuk" value="{{ shift.akhir_masuk | date:"H:i" }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Awal Pulang</h2>
+                                                                    <input type="time" class="form-control" name="awal_pulang" value="{{ shift.awal_pulang | date:"H:i" }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Jam Pulang</h2>
+                                                                    <input type="time" class="form-control" name="pulang" value="{{ shift.pulang | date:"H:i" }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 col-12 mb-3">
+                                                                <div class="form-group">
+                                                                    <h2 class="mb-0 h6 text-start">Akhir Pulang</h2>
+                                                                    <input type="time" class="form-control" name="akhir_pulang" value="{{ shift.akhir_pulang | date:"H:i" }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row text-center">
+                                                            <div class="col-md-6 col-12 mb-2">
+                                                                <a href="{% url 'hapusshift' id=shift.id %}" class="btn btn-danger">Delete</a>
+                                                            </div>
+                                                            <div class="col-md-6 col-12 mb-2">
+                                                                <button type="submit" class="btn btn-secondary">Perbarui</button>
+                                                            </div>                                               
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
+{% block js %}
+{% endblock%}

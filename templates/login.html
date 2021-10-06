@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volt Premium Bootstrap Dashboard - Sign in page</title>
+    <link type="text/css" href="{% static 'css/volt.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'vendor/sweetalert2/dist/sweetalert2.min.css' %}" rel="stylesheet">
+    <link type="text/css" href="{% static 'vendor/notyf/notyf.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <section class="vh-lg-100 mt-5 mt-lg-0 bg-soft d-flex align-items-center">
+            <div class="container">
+                <p class="text-center">
+                    <a href="/" class="d-flex align-items-center justify-content-center">
+                        <span><i class="fas fa-long-arrow-alt-left"></i> Back to homepage</span>
+                    </a>
+                </p>
+                <div class="row justify-content-center form-bg-image" data-background="{% static 'assets/illustrations/signin.svg' %}">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="bg-white shadow border-0 rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                            <div class="text-center text-md-center mb-4 mt-md-0">
+                                <h1 class="mb-0 h3">Log in</h1>
+                            </div>
+                            <form method="post" action="#" class="mt-4">
+                                {% csrf_token %}
+                                <div class="form-group mb-4">
+                                    <label for="username">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <i class="fas fa-user"></i>
+                                        </span>
+                                        <input type="text" class="form-control" placeholder="username" id="username" name="username" required>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-4">
+                                    <label for="password">Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon2">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                        <input type="password" placeholder="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-gray-800">Log in</button>
+                                </div>
+                            </form>
+                            <div class="d-flex justify-content-center align-items-center mt-4">
+                                <span class="fw-normal">
+                                    Not registered?
+                                    <a href="./sign-up.html" class="fw-bold">Create account</a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="{% static 'vendor/sweetalert2/dist/sweetalert2.all.min.js' %}"></script>
+    <script src="{% static 'js/volt.js' %}"></script>
+    <script src="https://kit.fontawesome.com/3836d321df.js" crossorigin="anonymous"></script>
+</body>
+</html>

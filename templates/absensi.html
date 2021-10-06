@@ -1,0 +1,134 @@
+{% extends "mainPage.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow mb-4">
+            <div class="card-header">
+                <h2 class="fs-5 fw-bold mb-0">Absensi</h2>
+            </div>
+            <div class="card-body">
+                <table id="data-absensi" class="table table-centered table-nowrap mb-0 rounded">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="border-0 rounded-start">#</th>
+                            <th class="border-0">NIP/NIK</th>
+                            <th class="border-0">NAMA</th>
+                            <th class="border-0">Tanggal</th>
+                            <th class="border-0">JAM DATANG</th>
+                            <th class="border-0">JAM PULANG</th>
+                            <th class="border-0">KETERANGAN</th>
+                            <th class="border-0 rounded-end">SUHU</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>198310202014042001</td>
+                            <td>Eka Mistiko Rini, S.Kom, M. Kom</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>198301192021211006</td>
+                            <td>Moh. Nur Shodiq, S.T, M.T</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>197601222021211001</td>
+                            <td>Moh. Dimyati A., S.T, M.Kom</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>                            
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>198010222015041001</td>
+                            <td>I Wayan Suardinata, S.Kom, M.T</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>                            
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>197704042021211004</td>
+                            <td>Dedy Hidayat Kusuma, S.T, M.Cs</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>                            
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>2013.36.106</td>
+                            <td>Farizqi Panduardi, S.ST., M.T</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>                            
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>197509272021211002</td>
+                            <td>Herman Yuliandoko, S.T, M.T</td>
+                            <td>27/02/2021</td>
+                            <td>00:00:00</td>
+                            <td>00:00:00</td>                            
+                            <td>Tidak Hadir</td>
+                            <td> °C</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'vendor/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/jszip/jszip.min.js' %}"></script>
+<script src="{% static 'vendor/pdfmake/pdfmake.min.js' %}"></script>
+<script src="{% static 'vendor/pdfmake/vfs_fonts.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<script>
+    $("#data-absensi").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false,
+        "ordering": false,
+        "buttons": ["pdf", "csv", "excel", "print"]
+    }).buttons().container().appendTo('.col-md-6:eq(0)');
+</script>
+{% endblock%}

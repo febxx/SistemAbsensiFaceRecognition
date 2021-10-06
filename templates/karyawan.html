@@ -1,0 +1,93 @@
+{% extends "mainPage.html" %}
+{% load static %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card border-0 shadow mb-4">
+            <div class="card-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h2 class="fs-5 fw-bold mb-0">Data Karyawan</h2>
+                    </div>
+                    <div class="col text-end">
+                        <a href="/tambahdata" class="btn btn-sm btn-primary"><i class="fas fa-user-plus"></i> Tambah Data</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class='table-responsive'>
+                    <table id="data-karyawan" class="table table-centered table-nowrap mb-0 rounded ">
+                        <thead class="thead-light">
+                            <tr>
+                                <th class="border-0 rounded-start">#</th>
+                                <th class="border-0">NIP/NIK</th>
+                                <th class="border-0">NAMA</th>
+                                <th class="border-0">EMAIL</th>
+                                <th class="border-0">NO HP</th>
+                                <th class="border-0">JK</th>
+                                <th class="border-0">Jabatan</th>
+                                <th class="border-0">ALAMAT</th>
+                                <th class="border-0 rounded-end">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in datas %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{data.nip}}</td>
+                                <td>{{data.nama}}</td>
+                                <td>{{data.email}}</td>
+                                <td>{{data.nohp}}</td>
+                                <td>{{data.jk}}</td>
+                                <td>{{data.jabatan}}</td>
+                                <td>{{data.alamat}}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-info" type="button"><i class="fas fa-edit"></i></button>
+                                    <a href="{% url 'hapusdata' id=data.id %}">
+                                        <button class="btn btn-sm btn-danger" type="button"><i class="fas fa-trash-alt"></i></button>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'vendor/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+<link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-responsive/js/responsive.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'vendor/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+
+<script>
+    $(function () {
+        $('#data-karyawan').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": false,
+            "info": true,
+            "autoWidth": false,
+            "responsive": false,
+        });
+    });
+</script>
+{% endblock%}
